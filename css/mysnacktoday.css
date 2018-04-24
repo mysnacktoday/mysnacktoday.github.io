@@ -1,0 +1,108 @@
+/* main-title is for big titles to attrack the attention
+ * secondary-titles is for a sub-title below the first one
+ *
+ * flavors:
+ *  -inv:       white color
+ *  -impact:    aria like font, uppercase
+ *
+ * tags:
+ *  h1          for titles
+ *  h2          for titles of sub sections
+ *
+ **/
+
+h1.main-title, h2.main-title, h1.main-title-impact, h2.main-title-impact {
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 1.4em;
+}
+
+h1.main-title, h2.main-title {
+    font-family: beautiful-cream,script;
+}
+
+h1.main-title-impact, h2.main-title-impact {
+    font-family: lulo,script;
+    text-transform: uppercase;
+}
+
+h1.main-title {
+    font-size: 93px;
+}
+
+h2.main-title {
+    font-size: 73px;
+}
+
+h2.main-title-impact {
+    font-size: 22px;
+}
+
+h1.title-color, h2.title-color {
+    color: #5F0038;
+}
+
+h1.title-color-inv, h2.title-color-inv {
+    color: #FFFFFF;
+}
+
+h1.title-color-alt, h2.title-color-alt {
+    color: #BADA55;
+}
+
+/* the idea is to have a h1 or h2 (with class main-title) and below
+ * another h1 or h2 (with classes main-title subtitle).
+ * Because there is too much space between those titles, we
+ * set a negative offset to close them up.
+ * */
+h1.subtitle {
+    margin-top: -60px;
+}
+
+h2.subtitle {
+    margin-top: -50px;
+}
+
+h2.subtitle-impact {
+    margin-top: -40px;
+}
+
+div.mysnack-panel {
+    background: rgba(240, 237, 230, 1);
+    color: #5F0038;
+}
+
+div.mysnack-panel-inv {
+    background: #5F0038;
+    color: #FFFFFF;
+}
+
+/*
+ * Make the content of the panel very tight.
+ * */
+div.mysnack-panel div, div.mysnack-panel-inv div {
+    margin-left:   0px;
+    margin-right:  0px;
+    padding-left:  0px;
+    padding-right: 0px;
+}
+
+/*
+ * Expand the images in each panel to fill the
+ * horizontal space
+ * */
+div.mysnack-panel div img, div.mysnack-panel-inv div img {
+    width: 100%;
+}
+
+p {
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    font-stretch: normal;
+    line-height: 1.5em;
+    font-family: futura,script;
+}
+

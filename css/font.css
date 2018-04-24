@@ -1,0 +1,15 @@
+
+@font-face {
+    font-family:"beautiful-cream";
+    src: url("../fonts/beautiful-cream.eot") format("eot"), url("../fonts/beautiful-cream.woff2") format("woff2"), url("../fonts/beautiful-cream.woff") format("woff"), url("../fonts/beautiful-cream.ttf") format("truetype"), url("../fonts/beautiful-cream.svg") format("svg");
+}
+
+@font-face {
+    font-family:"lulo";
+    src:url("../fonts/lulo.eot") format("eot"),url("../fonts/lulo.woff2") format("woff2"),url("../fonts/lulo.woff") format("woff"),url("../fonts/lulo.ttf") format("truetype"),url("../fonts/lulo.svg") format("svg");
+}
+
+@font-face {
+    font-family:"futura";
+    src:url("../fonts/futura.eot") format("eot"),url("../fonts/futura.woff2") format("woff2"),url("../fonts/futura.woff") format("woff"),url("../fonts/futura.ttf") format("truetype"),url("../fonts/futura.svg") format("svg");
+}
