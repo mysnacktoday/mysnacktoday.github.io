@@ -82,7 +82,7 @@ div.mysnack-panel-inv {
 /*
  * Make the content of the panel very tight.
  * */
-div.mysnack-panel div, div.mysnack-panel-inv div {
+div.mysnack-panel div.tight, div.mysnack-panel-inv div.tight {
     margin-left:   0px;
     margin-right:  0px;
     padding-left:  0px;
