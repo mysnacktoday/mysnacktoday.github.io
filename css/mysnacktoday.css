@@ -52,6 +52,16 @@ h1.title-color-alt, h2.title-color-alt {
     color: #BADA55;
 }
 
+.store .modal-footer .btn-primary {
+    background-color: #BADA55;
+    border-color: #A7D642;
+}
+
+.store .modal-footer .btn-primary:hover {
+    background-color: #A7D642;
+    border-color: #A7D642;
+}
+
 /* the idea is to have a h1 or h2 (with class main-title) and below
  * another h1 or h2 (with classes main-title subtitle).
  * Because there is too much space between those titles, we
@@ -93,7 +103,7 @@ div.mysnack-panel div.tight, div.mysnack-panel-inv div.tight {
  * Expand the images in each panel to fill the
  * horizontal space
  * */
-div.mysnack-panel div img, div.mysnack-panel-inv div img {
+div.mysnack-panel div img, div.mysnack-panel-inv div img, figure img {
     width: 100%;
 }
 
@@ -106,3 +116,6 @@ p {
     font-family: futura,script;
 }
 
+/*div.style3 {
+    font-family: futura,script;
+}*/

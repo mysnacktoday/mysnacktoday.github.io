@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>My Snack of Today - Productos</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <link href="css/carousel.css" rel="stylesheet">
+    <link href="css/font.css" rel="stylesheet">
+    <link href="css/mysnacktoday.css" rel="stylesheet">
+    <link href="css/thumbnails-cart.css" rel="stylesheet">
+  </head>
+  <body>
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-2" style="padding-right: 0px;">
+                  <section data-cart-view>
+                      <ul class="list-group list-group-flush">
+                          <li class="list-group-item-success list-group-item d-flex justify-content-between align-items-center"><span rv-unless="cart.total_quantity">Tu carrito esta vacio.</span></li>
+                          <li rv-each-product="cart.items | non_zero_items" class="list-group-item d-flex justify-content-between align-items-center">
+                              { product.name }
+                              <div class="form-inline">
+                                  <div class="form-group">
+                                      <div class="input-group">
+                                          <input type="number" class="form-control" cart-item-set rv-cart-item-id="product.id" rv-value="product.quantity" />
+                                          <div class="input-group-addon" aria-hidden="true" cart-item-del rv-cart-item-id="product.id"><i class="fa fa-times"></i></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </li>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                              Total
+                              <span class="amount text-primary pull-right">{ cart.total_price }$</span>
+                          </li>
+                      </ul>
+                  </section>
+              </div>
+              <div class="col-md-10">
+                  <section data-cart-view>
+                      <div class="row">
+                          <div class="col-sm-6 col-md-3" rv-each-product="cart.items">
+                              <div class="thumbnail store">
+                                  <div class="header">
+                                      <div class="badges">
+                                          <span rv-if="product.stars" class="product-badge top right stars">
+                                              <i rv-each-start="product.stars" class="fa fa-star"></i>
+                                          </span>
+                                      </div>
+                                      <figure class="layer">
+                                          <a href="javascript:void(0);">
+                                              <img rv-src="product.image" rv-alt="product.name">
+                                          </a>
+                                      </figure>
+                                      <div class="icons">
+                                          <!-- missing awesomfontjs's icon render a nice default icon with a terrible performance! <a class="icon semi-circle" href="javascript:void(0);"><i class="fa fa-heart-o"></i></a> -->
+                                          <a class="icon semi-circle" href="javascript:void(0);" cart-item-inc rv-cart-item-id="product.id"><i class="fa fa-plus"></i></a>
+                                          <a class="icon semi-circle" href="javascript:void(0);" data-toggle="modal" rv-data-target="product.link_modal"><i class="fa fa-search"></i></a>
+                                      </div>
+                                  </div>
+                                  <div class="caption">
+                                      <h6 class="regular"><a href="javascript:void(0);" data-toggle="modal" rv-data-target="product.link_modal">{ product.name }</a></h6>
+                                      <div class="price">
+                                          <small rv-if="product.price_off" class="amount off text-danger">{ product.price_off }$</small>
+                                          <span class="amount text-primary">{ product.price }$</span>
+                                      </div>
+                                  </div><!-- end caption -->
+                              </div><!-- end thumbnail -->
+                          </div><!-- end col -->
+                      </div>
+                  </section>
+              </div>
+          </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <p class="pull-right"><a href="#">Volver arriba</a></p>
+            <p>&copy; 2016-2018 My Snack Today. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </footer>
+
+    </div><!-- /.container -->
+
+    <!-- Modal - Details -->
+    <section data-cart-view>
+    <div rv-each-product="cart.items" class="modal fade" rv-id="product.modal_id" tabindex="-1" role="dialog" rv-aria-labelledby="product.name" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content store">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+              <h6 class="modal-title" rv-id="product.name">{ product.name }</h6>
+          </div>
+          <div class="modal-body">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-md-6">
+                        <figure class="layer">
+                          <img rv-src="product.image" rv-alt="product.name">
+                        </figure>
+                      </div>
+                      <div class="col-md-6 ml-auto">
+                          <dl rv-if="product.details">
+                              <span rv-each-detail="product.details">
+                                  <dt>{ detail.name }</dt>
+                                  <dd>{ detail.description }</dd>
+                              </span>
+                          </dl>
+                          <ul rv-if="product.details_listing">
+                              <li rv-each-proditem="product.details_listing">
+                                  { proditem }
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-md-3">
+                          <!-- <i class="fab fa-facebook"></i>
+                          <i class="fab fa-twitter"></i>
+                          <i class="fab fa-instagram"></i>
+                          <i class="fab fa-foursquare"></i> -->
+                      </div>
+                      <div class="col-md-8 col-md-push-1 ml-auto">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Seguir viendo</button>
+                            <button type="button" class="btn btn-primary" cart-item-inc rv-cart-item-id="product.id" data-dismiss="modal">Agregar al carrito</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <script defer src="js/fontawesome-all.min.js"></script>
+        <script src="js/rivets-cart.js"></script>
+        <script src="js/cart.js"></script>
+
+        <script type="text/javascript">
+jQuery(function() {
+    var item_definition_list = [
+        {
+            // Item ID: it must be unique
+            "id": 1,
+
+            // Name of the product
+            "name": "Alfajor de Quinoa y Dulce de Leche 70g | Kiwicha",
+
+            // URL of the image of the product
+            "image": "imgs/prods/alfajores.jpg",
+
+            // Price
+            "price": 23,
+
+            // "discount": If it is 0, nothing is shown but if not, this
+            // is the price shown in red, a greater than Price
+            "price_off" : 0,
+
+            // Count of stars: [] for zero stars, [1] for one,
+            // [1, 1] for two, [1, 1, 1] for three...
+            "stars" : [1, 1, 1],
+            "details": [
+                {
+                    // Name of the details' subsection
+                    "name": "Ingredientes",
+
+                    // Description: the text of the subsection
+                    "description": "agua, harina de quinoa, harina integral, aceite y dulce de leche",
+                },
+                {
+                    "name": "Propiedades",
+                    "description": "Este alfajor está hecho con harina de quinoa e integral. Gracias a la fibra que aporta, sacia mucho más el hambre y favorece el tránsito intestinal. A disfrutar!",
+                },
+                {
+                    "name": "Valor Nutricional",
+                    "description": "shajksja jahsjahsja jhasjhsa",
+                },
+            ],
+
+            // Listing: show a list of texts in the details. [] for an empty list.
+            "details_listing": [],
+        },
+        {
+            "id": 2,
+            "name": "Frutos secos - Granix",
+            "image": "imgs/prods/frutos_secos.jpg",
+            "price": 50,
+            "price_off" : 80,
+            "stars" : [1, 1],
+            "details_listing": [
+                    "Chips de batata 90g | Alwa",
+                    "Galletitas de avena y almendras 250g | Green Mills",
+                    "Talitas con chía y girasol 180g | Menego",
+                    "Frutilla liofilizada 10g | Frutti Croc",
+                    "Pistachos 60g | De la Abuela",
+                    "Brownie orgánico de algarroba | Secreto Campesino",
+                    "Barra de granola y chips de chocolate 25g | Lyv",
+                    "Alfajor de quinoa y dulce de leche 70g| Kiwicha",
+                    "Tornaditos de albahaca, tomate y queso 100g | Dietitas de Olibia",
+                    ]
+        },
+        {
+            "id": 3,
+            "name": "Frutos secos - Granix",
+            "image": "imgs/prods/frutos_secos.jpg",
+            "price": 50,
+            "price_off" : 80,
+            "stars" : [],
+        },
+        {
+            "id": 4,
+            "name": "Frutos secos - Granix",
+            "image": "imgs/prods/frutos_secos.jpg",
+            "price": 50,
+            "price_off" : 80,
+            "stars" : [],
+        },
+        {
+            "id": 5,
+            "name": "Frutos secos - Granix",
+            "image": "imgs/prods/frutos_secos.jpg",
+            "price": 50,
+            "price_off" : 80,
+            "stars" : [],
+        },
+        {
+            "id": 6,
+            "name": "Frutos secos - Granix",
+            "image": "imgs/prods/frutos_secos.jpg",
+            "price": 50,
+            "price_off" : 80,
+            "stars" : [],
+        },
+        {
+            "id": 7,
+            "name": "Frutos secos - Granix",
+            "image": "imgs/prods/frutos_secos.jpg",
+            "price": 50,
+            "price_off" : 80,
+            "stars" : [],
+        },
+        {
+            "id": 8,
+            "name": "Frutos secos - Granix",
+            "image": "imgs/prods/frutos_secos.jpg",
+            "price": 50,
+            "price_off" : 80,
+            "stars" : [],
+        },
+        {
+            "id": 9,
+            "name": "Frutos secos - Granix",
+            "image": "imgs/prods/frutos_secos.jpg",
+            "price": 50,
+            "price_off" : 80,
+            "stars" : [],
+        }
+        ];
+
+    item_definition_list = (function enhance_item_list (items) {
+        var ids = [];
+        var good_items = [];
+        for (var i = 0; i < items.length; ++i) {
+            var item = items[i];
+            if (ids.indexOf(item.id) >= 0) {
+                console.error("duplicated ids: removing item number "+i+" (id "+item.id+")");
+                continue;
+            }
+            if (!item.price || item.price <= 0) {
+                console.error("invalid price: removing item number "+i+" (price "+item.price+")");
+                continue;
+            }
+            if (item.price_off && (item.price >= item.price_off)) {
+                console.error("invalid price off: removing item number "+i+" (price off "+item.price_off+")");
+                continue;
+            }
+
+            ids.push(item.id);
+            item.modal_id   =  "product-" + item.id;
+            item.link_modal = "#product-" + item.id;
+
+            good_items.push(item);
+        }
+
+        return good_items;
+    })(item_definition_list);
+
+    var cart = new Cart(item_definition_list);
+
+    var models = {cart: cart};
+    jQuery('[data-cart-view]').each(function() {
+      var view;
+      view = rivets.bind(jQuery(this), models);
+      return view;
+    });
+
+
+    jQuery(document).on('click', '[cart-item-inc]', function(e) {
+        e.preventDefault();
+        var item_id = jQuery(this).attr('cart-item-id');
+        cart.inc_quantity(item_id);
+    });
+    jQuery(document).on('click', '[cart-item-del]', function(e) {
+        e.preventDefault();
+        var item_id = jQuery(this).attr('cart-item-id');
+        cart.set_quantity(item_id, 0);
+    });
+    jQuery(document).on('change', '[cart-item-set]', function(e) {
+        e.preventDefault();
+        var $input = jQuery(this);
+        var item_id = $input.attr('cart-item-id');
+        cart.set_quantity(item_id, $input.val());
+
+        var quantity = cart.get_quantity(item_id);
+
+        // Do not allow to set a negative number nor
+        // a zero. If the user wants to drop the items,
+        // he can delete it directly. This is as is because
+        // if the user add 1 item (count=1) and he wants to
+        // increase it, he may click in the dec-button instead
+        // of the inc-button by accident: the count reaches zero
+        // the item is removed from the list and the user need to
+        // go to the grid again (even he may not notice what happen!)
+        if (quantity <= 1) {
+            quantity = 1;
+            cart.set_quantity(item_id, quantity);
+        }
+
+        $input.val(quantity);
+    });
+});
+        </script>
+  </body>
+</html>
+
