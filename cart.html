@@ -158,195 +158,99 @@
 
         <script type="text/javascript">
 jQuery(function() {
-    var item_definition_list = [
-        {
-            // Item ID: it must be unique
-            "id": 1,
+    /* Item Definition List:
+       An array of objects. Each object represent an item with
+       the following attributes:
 
-            // Name of the product
-            "name": "Alfajor de Quinoa y Dulce de Leche 70g | Kiwicha",
+        Item ID: it must be unique
+        "id": 1,
 
-            // URL of the image of the product
-            "image": "imgs/prods/alfajores.jpg",
+        Name of the product
+        "name": "Alfajor",
 
-            // Price
-            "price": 23,
+        URL of the image of the product
+        "image": "imgs/prods/alfajores.jpg",
 
-            // "discount": If it is 0, nothing is shown but if not, this
-            // is the price shown in red, a greater than Price
-            "price_off" : 0,
+        Price
+        "price": 10,
 
-            // Count of stars: [] for zero stars, [1] for one,
-            // [1, 1] for two, [1, 1, 1] for three...
-            "stars" : [1, 1, 1],
-            "details": [
-                {
-                    // Name of the details' subsection
-                    "name": "Ingredientes",
+        Old Price: If it is 0, nothing is shown but if not, this
+        is the price shown in red, a *greater than Price*
+        "price_off" : 0,
 
-                    // Description: the text of the subsection
-                    "description": "agua, harina de quinoa, harina integral, aceite y dulce de leche",
-                },
-                {
-                    "name": "Propiedades",
-                    "description": "Este alfajor está hecho con harina de quinoa e integral. Gracias a la fibra que aporta, sacia mucho más el hambre y favorece el tránsito intestinal. A disfrutar!",
-                },
-                {
-                    "name": "Valor Nutricional",
-                    "description": "shajksja jahsjahsja jhasjhsa",
-                },
-            ],
+        Count of stars
+        "stars" : 3
 
-            // Listing: show a list of texts in the details. [] for an empty list.
-            "details_listing": [],
-        },
-        {
-            "id": 2,
-            "name": "Frutos secos - Granix",
-            "image": "imgs/prods/frutos_secos.jpg",
-            "price": 50,
-            "price_off" : 80,
-            "stars" : [1, 1],
-            "details_listing": [
-                    "Chips de batata 90g | Alwa",
-                    "Galletitas de avena y almendras 250g | Green Mills",
-                    "Talitas con chía y girasol 180g | Menego",
-                    "Frutilla liofilizada 10g | Frutti Croc",
-                    "Pistachos 60g | De la Abuela",
-                    "Brownie orgánico de algarroba | Secreto Campesino",
-                    "Barra de granola y chips de chocolate 25g | Lyv",
-                    "Alfajor de quinoa y dulce de leche 70g| Kiwicha",
-                    "Tornaditos de albahaca, tomate y queso 100g | Dietitas de Olibia",
-                    ]
-        },
-        {
-            "id": 3,
-            "name": "Frutos secos - Granix",
-            "image": "imgs/prods/frutos_secos.jpg",
-            "price": 50,
-            "price_off" : 80,
-            "stars" : [],
-        },
-        {
-            "id": 4,
-            "name": "Frutos secos - Granix",
-            "image": "imgs/prods/frutos_secos.jpg",
-            "price": 50,
-            "price_off" : 80,
-            "stars" : [],
-        },
-        {
-            "id": 5,
-            "name": "Frutos secos - Granix",
-            "image": "imgs/prods/frutos_secos.jpg",
-            "price": 50,
-            "price_off" : 80,
-            "stars" : [],
-        },
-        {
-            "id": 6,
-            "name": "Frutos secos - Granix",
-            "image": "imgs/prods/frutos_secos.jpg",
-            "price": 50,
-            "price_off" : 80,
-            "stars" : [],
-        },
-        {
-            "id": 7,
-            "name": "Frutos secos - Granix",
-            "image": "imgs/prods/frutos_secos.jpg",
-            "price": 50,
-            "price_off" : 80,
-            "stars" : [],
-        },
-        {
-            "id": 8,
-            "name": "Frutos secos - Granix",
-            "image": "imgs/prods/frutos_secos.jpg",
-            "price": 50,
-            "price_off" : 80,
-            "stars" : [],
-        },
-        {
-            "id": 9,
-            "name": "Frutos secos - Granix",
-            "image": "imgs/prods/frutos_secos.jpg",
-            "price": 50,
-            "price_off" : 80,
-            "stars" : [],
-        }
-        ];
+        Details: an array of objects (name and description tuples)
+        to be shown as the details of the product (think in Section and
+        Description)
+        "details": [
+            {
+                // Name of the details' subsection
+                "name": "Ingredientes",
 
-    item_definition_list = (function enhance_item_list (items) {
-        var ids = [];
-        var good_items = [];
-        for (var i = 0; i < items.length; ++i) {
-            var item = items[i];
-            if (ids.indexOf(item.id) >= 0) {
-                console.error("duplicated ids: removing item number "+i+" (id "+item.id+")");
-                continue;
-            }
-            if (!item.price || item.price <= 0) {
-                console.error("invalid price: removing item number "+i+" (price "+item.price+")");
-                continue;
-            }
-            if (item.price_off && (item.price >= item.price_off)) {
-                console.error("invalid price off: removing item number "+i+" (price off "+item.price_off+")");
-                continue;
+                // Description: the text of the subsection
+                "description": "agua, harina y dulce de leche",
+            },
+            {
+                "name": "Propiedades",
+                "description": "Este alfajor es muy saludable.",
+            },
+        ],
+
+        Listing: show a list of texts in the details. [] for an empty list.
+        (think in a bullet list) Useful for combos to list all the sub-items
+        "details_listing": []
+
+    */
+    jQuery.getJSON('prods/items.js', function (item_definition_list) {
+        console.log("Item Definition List is a valid json. Proceeding...");
+        item_definition_list = enhance_item_list(item_definition_list);
+
+        var cart = new Cart(item_definition_list);
+
+        /* Bind views... */
+        var models = {cart: cart};
+        jQuery('[data-cart-view]').each(function() {
+          var view;
+          view = rivets.bind(jQuery(this), models);
+          return view;
+        });
+
+
+        jQuery(document).on('click', '[cart-item-inc]', function(e) {
+            e.preventDefault();
+            var item_id = jQuery(this).attr('cart-item-id');
+            cart.inc_quantity(item_id);
+        });
+        jQuery(document).on('click', '[cart-item-del]', function(e) {
+            e.preventDefault();
+            var item_id = jQuery(this).attr('cart-item-id');
+            cart.set_quantity(item_id, 0);
+        });
+        jQuery(document).on('change', '[cart-item-set]', function(e) {
+            e.preventDefault();
+            var $input = jQuery(this);
+            var item_id = $input.attr('cart-item-id');
+            cart.set_quantity(item_id, $input.val());
+
+            var quantity = cart.get_quantity(item_id);
+
+            // Do not allow to set a negative number nor
+            // a zero. If the user wants to drop the items,
+            // he can delete it directly. This is as is because
+            // if the user add 1 item (count=1) and he wants to
+            // increase it, he may click in the dec-button instead
+            // of the inc-button by accident: the count reaches zero
+            // the item is removed from the list and the user need to
+            // go to the grid again (even he may not notice what happen!)
+            if (quantity <= 1) {
+                quantity = 1;
+                cart.set_quantity(item_id, quantity);
             }
 
-            ids.push(item.id);
-            item.modal_id   =  "product-" + item.id;
-            item.link_modal = "#product-" + item.id;
-
-            good_items.push(item);
-        }
-
-        return good_items;
-    })(item_definition_list);
-
-    var cart = new Cart(item_definition_list);
-
-    var models = {cart: cart};
-    jQuery('[data-cart-view]').each(function() {
-      var view;
-      view = rivets.bind(jQuery(this), models);
-      return view;
-    });
-
-
-    jQuery(document).on('click', '[cart-item-inc]', function(e) {
-        e.preventDefault();
-        var item_id = jQuery(this).attr('cart-item-id');
-        cart.inc_quantity(item_id);
-    });
-    jQuery(document).on('click', '[cart-item-del]', function(e) {
-        e.preventDefault();
-        var item_id = jQuery(this).attr('cart-item-id');
-        cart.set_quantity(item_id, 0);
-    });
-    jQuery(document).on('change', '[cart-item-set]', function(e) {
-        e.preventDefault();
-        var $input = jQuery(this);
-        var item_id = $input.attr('cart-item-id');
-        cart.set_quantity(item_id, $input.val());
-
-        var quantity = cart.get_quantity(item_id);
-
-        // Do not allow to set a negative number nor
-        // a zero. If the user wants to drop the items,
-        // he can delete it directly. This is as is because
-        // if the user add 1 item (count=1) and he wants to
-        // increase it, he may click in the dec-button instead
-        // of the inc-button by accident: the count reaches zero
-        // the item is removed from the list and the user need to
-        // go to the grid again (even he may not notice what happen!)
-        if (quantity <= 1) {
-            quantity = 1;
-            cart.set_quantity(item_id, quantity);
-        }
-
-        $input.val(quantity);
+            $input.val(quantity);
+        });
     });
 });
         </script>

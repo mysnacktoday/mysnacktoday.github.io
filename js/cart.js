@@ -517,8 +517,42 @@
 
   };
 
+  function enhance_item_list (items) {
+        var ids = [];
+        var good_items = [];
+        for (var i = 0; i < items.length; ++i) {
+            var item = items[i];
+            if (ids.indexOf(item.id) >= 0) {
+                console.error("duplicated ids: removing item number "+i+" (id "+item.id+")");
+                continue;
+            }
+            if (!item.price || item.price <= 0) {
+                console.error("invalid price: removing item number "+i+" (price "+item.price+")");
+                continue;
+            }
+            if (item.price_off && (item.price >= item.price_off)) {
+                console.error("invalid price off: removing item number "+i+" (price off "+item.price_off+")");
+                continue;
+            }
+
+            var stars = [];
+            for (var j = 0; j < (item.stars || 0); ++j)
+                stars.push(1);
+
+            item.stars = stars;
+
+            ids.push(item.id);
+            item.modal_id   =  "product-" + item.id;
+            item.link_modal = "#product-" + item.id;
+
+            good_items.push(item);
+        }
+
+        return good_items;
+    }
 
   exports.Cart = Cart;
+  exports.enhance_item_list = enhance_item_list;
   exports.test_cart = test;
 
 })(this);
